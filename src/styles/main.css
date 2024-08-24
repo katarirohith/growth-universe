@@ -1,0 +1,28 @@
+/* src/styles/main.css */
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+body {
+  background-color: theme("colors.background");
+  color: theme("colors.text");
+}
+
+.futuristic-border {
+  border-width: 1px;
+  border-color: rgba(255, 255, 255, 0.3);
+  border-radius: 0.5rem;
+  backdrop-filter: blur(4px);
+}
+
+.gradient-text {
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(
+    to right,
+    theme("colors.primary"),
+    theme("colors.secondary"),
+    theme("colors.accent")
+  );
+}
