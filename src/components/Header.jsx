@@ -1,9 +1,15 @@
 // src/components/Header.jsx
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
-const Header = () => {
+const Header = ({ onServicesClick }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const handleServicesClick = (e) => {
+    e.preventDefault(); // Prevent default anchor link behavior
+    onServicesClick(); // Directly call the scroll function
+  };
 
   return (
     <header className="bg-white shadow-sm w-full z-50">
@@ -46,12 +52,13 @@ const Header = () => {
             >
               Home
             </Link>
-            <Link
-              to="/services"
+            <a
+              href="#services"
+              onClick={handleServicesClick}
               className="text-gray-700 hover:text-primary transition-colors text-lg font-medium"
             >
               Services
-            </Link>
+            </a>
             <Link
               to="/products"
               className="text-gray-700 hover:text-primary transition-colors text-lg font-medium"
@@ -119,12 +126,13 @@ const Header = () => {
             >
               Home
             </Link>
-            <Link
-              to="/services"
+            <a
+              href="#services"
+              onClick={handleServicesClick}
               className="block py-2 text-gray-700 hover:text-primary transition-colors text-lg font-medium"
             >
               Services
-            </Link>
+            </a>
             <Link
               to="/products"
               className="block py-2 text-gray-700 hover:text-primary transition-colors text-lg font-medium"
@@ -160,6 +168,10 @@ const Header = () => {
       </div>
     </header>
   );
+};
+
+Header.propTypes = {
+  onServicesClick: PropTypes.func.isRequired, // Validate the prop type
 };
 
 export default Header;

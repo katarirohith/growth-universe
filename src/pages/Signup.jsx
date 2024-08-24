@@ -1,5 +1,4 @@
 // src/pages/Signup.jsx
-/* eslint-disable no-unused-vars */
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaGoogle } from "react-icons/fa";
