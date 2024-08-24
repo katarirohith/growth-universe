@@ -6,67 +6,95 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className="bg-[#FFF8F2] shadow-sm w-full z-50">
+    <header className="bg-white shadow-sm w-full z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
-          <Link to="/" className="text-2xl font-bold text-[#541400]">
+          {/* Logo */}
+          <Link
+            to="/"
+            className="text-2xl font-bold text-primary flex items-center"
+          >
+            <svg
+              className="w-8 h-8 mr-2"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M12 21v-6m0 0c-1.3 0-2.5-.5-3.5-1.5s-1.5-2.2-1.5-3.5 1-2.6 2.5-3.2c1.5-.6 3.3.2 3.3 1.8m0 6.4c1.3 0 2.5-.5 3.5-1.5s1.5-2.2 1.5-3.5-1-2.6-2.5-3.2c-1.5-.6-3.3.2-3.3 1.8"
+              />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M12 15l-2-2m2 2l2-2"
+              />
+              <circle cx="12" cy="4" r="2" fill="currentColor" />
+            </svg>
             Growth Universe
           </Link>
 
-          <nav className="hidden lg:flex items-center space-x-6">
+          {/* Desktop Navigation */}
+          <nav className="hidden lg:flex items-center space-x-8">
             <Link
               to="/"
-              className="text-gray-700 hover:text-[#541400] transition-colors"
+              className="text-gray-700 hover:text-primary transition-colors text-lg font-medium"
             >
               Home
             </Link>
             <Link
-              to="#services"
-              className="text-gray-700 hover:text-[#541400] transition-colors"
+              to="/services"
+              className="text-gray-700 hover:text-primary transition-colors text-lg font-medium"
             >
               Services
             </Link>
             <Link
               to="/products"
-              className="text-gray-700 hover:text-[#541400] transition-colors"
+              className="text-gray-700 hover:text-primary transition-colors text-lg font-medium"
             >
               Products
             </Link>
             <Link
               to="/about"
-              className="text-gray-700 hover:text-[#541400] transition-colors"
+              className="text-gray-700 hover:text-primary transition-colors text-lg font-medium"
             >
               About
             </Link>
             <Link
               to="/contact"
-              className="text-gray-700 hover:text-[#541400] transition-colors"
+              className="text-gray-700 hover:text-primary transition-colors text-lg font-medium"
             >
               Contact
             </Link>
           </nav>
 
+          {/* Call to Action Buttons */}
           <div className="hidden lg:flex items-center space-x-4">
             <Link
               to="/login"
-              className="text-[#541400] hover:text-[#FF8A6B] transition-colors"
+              className="text-primary hover:text-secondary transition-colors text-lg font-medium"
             >
               Login
             </Link>
             <Link
               to="/signup"
-              className="bg-[#541400] text-white px-4 py-2 rounded-full hover:bg-[#FF8A6B] transition-colors"
+              className="bg-primary text-white px-5 py-2 rounded-full hover:bg-secondary transition-colors text-lg font-medium"
             >
               Sign Up
             </Link>
           </div>
 
+          {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="lg:hidden text-gray-700 hover:text-[#541400] transition-colors"
+            className="lg:hidden text-gray-700 hover:text-primary transition-colors focus:outline-none"
           >
             <svg
-              className="w-6 h-6"
+              className="w-8 h-8"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -82,47 +110,48 @@ const Header = () => {
           </button>
         </div>
 
+        {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="lg:hidden py-4">
+          <div className="lg:hidden py-4 space-y-2">
             <Link
               to="/"
-              className="block py-2 text-gray-700 hover:text-[#541400] transition-colors"
+              className="block py-2 text-gray-700 hover:text-primary transition-colors text-lg font-medium"
             >
               Home
             </Link>
             <Link
               to="/services"
-              className="block py-2 text-gray-700 hover:text-[#541400] transition-colors"
+              className="block py-2 text-gray-700 hover:text-primary transition-colors text-lg font-medium"
             >
               Services
             </Link>
             <Link
               to="/products"
-              className="block py-2 text-gray-700 hover:text-[#541400] transition-colors"
+              className="block py-2 text-gray-700 hover:text-primary transition-colors text-lg font-medium"
             >
               Products
             </Link>
             <Link
               to="/about"
-              className="block py-2 text-gray-700 hover:text-[#541400] transition-colors"
+              className="block py-2 text-gray-700 hover:text-primary transition-colors text-lg font-medium"
             >
               About
             </Link>
             <Link
               to="/contact"
-              className="block py-2 text-gray-700 hover:text-[#541400] transition-colors"
+              className="block py-2 text-gray-700 hover:text-primary transition-colors text-lg font-medium"
             >
               Contact
             </Link>
             <Link
               to="/login"
-              className="block py-2 text-[#541400] hover:text-[#FF8A6B] transition-colors"
+              className="block py-2 text-primary hover:text-secondary transition-colors text-lg font-medium"
             >
               Login
             </Link>
             <Link
               to="/signup"
-              className="block py-2 mt-2 bg-[#541400] text-white px-4 rounded-full hover:bg-[#FF8A6B] transition-colors text-center"
+              className="block py-2 bg-primary text-white px-5 rounded-full hover:bg-secondary transition-colors text-lg font-medium text-center"
             >
               Sign Up
             </Link>

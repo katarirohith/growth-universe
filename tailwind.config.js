@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "#FF6B6B",
+        primary: "#541400",
         primarydark: "#FF8A6B",
         offwhite: "#FFF8F2",
         secondary: "#FFB347", // Pastel Orange
