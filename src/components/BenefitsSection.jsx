@@ -51,12 +51,12 @@ const benefits = [
 
 const BenefitsSection = () => {
   return (
-    <section className="py-20 bg-background">
-      <div className="container mx-auto px-6">
-        <h2 className="text-4xl font-bold mb-16 gradient-text text-center">
+    <section className="py-12 sm:py-20 bg-background" id="benefits">
+      <div className="container mx-auto px-4 sm:px-6">
+        <h2 className="text-3xl sm:text-4xl font-bold mb-8 sm:mb-12 gradient-text text-center">
           Benefits of our Courses and Coaching Programs
         </h2>
-        <p className="text-center text-xl mb-8 max-w-3xl mx-auto">
+        <p className="text-center text-base sm:text-lg mb-8 max-w-3xl mx-auto">
           Our programs offer a blend of mindfulness practices, self-awareness
           exercises, and transformative workshops tailored to support your
           journey toward inner peace and clarity.
@@ -67,18 +67,24 @@ const BenefitsSection = () => {
           strategies to manage stress, enhance emotional intelligence, and
           foster a balanced, purpose-driven life.
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {benefits.map((benefit, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-gradient-to-br from-primary/10 to-secondary/10 p-8 rounded-2xl backdrop-blur-sm hover:shadow-2xl transition-all duration-300 cursor-pointer"
+              className="bg-gradient-to-br from-primary/10 to-secondary/10 p-6 sm:p-8 rounded-2xl backdrop-blur-sm hover:shadow-2xl transition-all duration-300"
             >
-              <benefit.icon className="text-5xl mb-6 text-accent" />
-              <h3 className="text-xl font-semibold mb-4">{benefit.title}</h3>
-              <p className="text-text/70">{benefit.description}</p>
+              <div className="bg-primary/20 rounded-full p-4 w-16 h-16 flex items-center justify-center mb-4 sm:mb-6">
+                <benefit.icon className="text-3xl sm:text-4xl text-primary" />
+              </div>
+              <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-4">
+                {benefit.title}
+              </h3>
+              <p className="text-sm sm:text-base text-text/70">
+                {benefit.description}
+              </p>
             </motion.div>
           ))}
         </div>

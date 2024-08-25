@@ -53,11 +53,11 @@ const HeroSection = () => {
               <span className="bg-[#541400] text-white py-1 px-3 rounded-full text-xs font-medium mr-3">
                 #1
               </span>
-              Business Growth Platform
+              Personal Growth Platform
             </div>
             <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 mb-6">
               Elevate Your{" "}
-              <span className="text-[#541400]">Business Growth</span>
+              <span className="text-[#541400]">Personal Growth</span>
             </h1>
 
             {/* Animated Quote Section */}
@@ -83,8 +83,8 @@ const HeroSection = () => {
             </div>
 
             <p className="text-xl text-gray-600 mb-8 max-w-lg">
-              Unlock your company's full potential with our innovative solutions
-              and strategic guidance.
+              Unlock your full potential and thrive in every aspect of life with
+              Growth Universe 🌱🧠
             </p>
             <p className="text-lg text-gray-600 mb-4 max-w-lg">
               Designed to make an everlasting impact!
