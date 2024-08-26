@@ -1,15 +1,9 @@
 // src/components/Header.jsx
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
 
-const Header = ({ onServicesClick }) => {
+const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const handleServicesClick = (e) => {
-    e.preventDefault(); // Prevent default anchor link behavior
-    onServicesClick(); // Directly call the scroll function
-  };
 
   return (
     <header className="bg-white shadow-sm w-full z-50">
@@ -52,30 +46,29 @@ const Header = ({ onServicesClick }) => {
             >
               Home
             </Link>
-            <a
-              href="#services"
-              onClick={handleServicesClick}
-              className="text-gray-700 hover:text-primary transition-colors text-lg font-medium"
-            >
-              Services
-            </a>
             <Link
-              to="/products"
+              to="/courses"
               className="text-gray-700 hover:text-primary transition-colors text-lg font-medium"
             >
-              Products
+              Courses
             </Link>
             <Link
-              to="/about"
+              to="/workshops-events"
               className="text-gray-700 hover:text-primary transition-colors text-lg font-medium"
             >
-              About
+              Workshops & Events
             </Link>
             <Link
-              to="/contact"
+              to="/content-creation"
               className="text-gray-700 hover:text-primary transition-colors text-lg font-medium"
             >
-              Contact
+              Content
+            </Link>
+            <Link
+              to="/lms"
+              className="text-gray-700 hover:text-primary transition-colors text-lg font-medium"
+            >
+              LMS
             </Link>
           </nav>
 
@@ -123,43 +116,49 @@ const Header = ({ onServicesClick }) => {
             <Link
               to="/"
               className="block py-2 text-gray-700 hover:text-primary transition-colors text-lg font-medium"
+              onClick={() => setIsMenuOpen(false)}
             >
               Home
             </Link>
-            <a
-              href="#services"
-              onClick={handleServicesClick}
-              className="block py-2 text-gray-700 hover:text-primary transition-colors text-lg font-medium"
-            >
-              Services
-            </a>
             <Link
-              to="/products"
+              to="/courses"
               className="block py-2 text-gray-700 hover:text-primary transition-colors text-lg font-medium"
+              onClick={() => setIsMenuOpen(false)}
             >
-              Products
+              Courses
             </Link>
             <Link
-              to="/about"
+              to="/workshops-events"
               className="block py-2 text-gray-700 hover:text-primary transition-colors text-lg font-medium"
+              onClick={() => setIsMenuOpen(false)}
             >
-              About
+              Workshops & Events
             </Link>
             <Link
-              to="/contact"
+              to="/content-creation"
               className="block py-2 text-gray-700 hover:text-primary transition-colors text-lg font-medium"
+              onClick={() => setIsMenuOpen(false)}
             >
-              Contact
+              Content
+            </Link>
+            <Link
+              to="/lms"
+              className="block py-2 text-gray-700 hover:text-primary transition-colors text-lg font-medium"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              LMS
             </Link>
             <Link
               to="/login"
               className="block py-2 text-primary hover:text-secondary transition-colors text-lg font-medium"
+              onClick={() => setIsMenuOpen(false)}
             >
               Login
             </Link>
             <Link
               to="/signup"
               className="block py-2 bg-primary text-white px-5 rounded-full hover:bg-secondary transition-colors text-lg font-medium text-center"
+              onClick={() => setIsMenuOpen(false)}
             >
               Sign Up
             </Link>
@@ -168,10 +167,6 @@ const Header = ({ onServicesClick }) => {
       </div>
     </header>
   );
-};
-
-Header.propTypes = {
-  onServicesClick: PropTypes.func.isRequired, // Validate the prop type
 };
 
 export default Header;

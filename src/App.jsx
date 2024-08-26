@@ -10,6 +10,7 @@ import CoursesSection from "./components/CoursesSection";
 import EnrollPage from "./pages/EnrollPage";
 import ContentCreationSection from "./components/ContentCreationSection";
 import WorkshopsEventsSection from "./components/WorkshopsEventsSection";
+import LMSSection from "./components/LMSSection";
 
 const App = () => {
   const servicesRef = useRef(null); // Define the ref here
@@ -34,7 +35,9 @@ const App = () => {
           <Route path="/courses" element={<CoursesSection />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/about" element={<About />} />
+          <Route path="/lms" element={<LMSSection />} />
           <Route path="/enroll/:courseId" element={<EnrollPage />} />
+          <Route path="/enroll/:offeringId" element={<EnrollPage />} />
           <Route
             path="/workshops-events"
             element={<WorkshopsEventsSection />}

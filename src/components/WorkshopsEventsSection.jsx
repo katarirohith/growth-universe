@@ -114,7 +114,7 @@ const WorkshopsEventsSection = () => {
                 </div>
               </div>
               <Link
-                to={`/enroll-workshop/${offering.id}`}
+                to={`/enroll/${offering.id}`}
                 className="mt-8 block w-full py-3 px-6 border border-transparent rounded-md text-center font-medium bg-primary text-white hover:bg-primary/90 transition-colors duration-300"
               >
                 Enroll Now

@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { motion } from "framer-motion";
-// import { useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const schema = yup.object().shape({
   firstName: yup.string().required("First name is required"),
@@ -16,7 +16,7 @@ const schema = yup.object().shape({
     .required("Phone number is required"),
   organization: yup.string().required("Organization name is required"),
   role: yup.string().required("Role is required"),
-  eventType: yup.string().required("Event type is required"),
+  serviceType: yup.string().required("Service type is required"),
   participants: yup
     .number()
     .positive()
@@ -40,13 +40,16 @@ RequiredLabel.propTypes = {
 };
 
 const EnrollPage = () => {
-  //   const { offeringId } = useParams();
+  const { offeringId } = useParams();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
+    defaultValues: {
+      serviceType: offeringId,
+    },
   });
 
   const onSubmit = (data) => {
@@ -66,7 +69,7 @@ const EnrollPage = () => {
       <div className="w-full max-w-3xl mx-auto p-8">
         <div className="bg-white p-8 rounded-lg shadow-md border border-gray-200">
           <h1 className="text-2xl font-bold text-gray-900 mb-4">
-            Enroll in Workshop/Event
+            Enroll in Service
           </h1>
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
@@ -177,22 +180,24 @@ const EnrollPage = () => {
             </div>
 
             <div>
-              <label htmlFor="eventType" className="block text-gray-700 mb-1">
-                <RequiredLabel>Event Type</RequiredLabel>
+              <label htmlFor="serviceType" className="block text-gray-700 mb-1">
+                <RequiredLabel>Service Type</RequiredLabel>
               </label>
               <select
-                id="eventType"
-                {...register("eventType")}
+                id="serviceType"
+                {...register("serviceType")}
                 className="w-full rounded-lg border border-gray-300 py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
               >
-                <option value="">Select an event type</option>
-                <option value="workshop">Workshop</option>
-                <option value="multi-day-event">Multi-day Event</option>
-                <option value="retreat">Retreat</option>
+                <option value="">Select a service type</option>
+                <option value="online-courses">Online Courses</option>
+                <option value="workshops">Workshops</option>
+                <option value="events">Events</option>
+                <option value="digital-content">Digital Content</option>
+                <option value="coaching-programs">Coaching Programs</option>
               </select>
-              {errors.eventType && (
+              {errors.serviceType && (
                 <p className="mt-1 text-sm text-red-600">
-                  {errors.eventType.message}
+                  {errors.serviceType.message}
                 </p>
               )}
             </div>
