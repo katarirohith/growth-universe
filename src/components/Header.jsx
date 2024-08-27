@@ -1,9 +1,48 @@
 // src/components/Header.jsx
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useRef, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext"; // Make sure this path is correct
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const { currentUser, logout } = useAuth();
+  const navigate = useNavigate();
+  const profileRef = useRef(null);
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      setIsProfileOpen(false); // Close profile options on logout
+      navigate("/login");
+    } catch (error) {
+      console.error("Failed to log out", error);
+    }
+  };
+
+  const getUserInitial = () => {
+    return currentUser && currentUser.email
+      ? currentUser.email[0].toUpperCase()
+      : "?";
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (profileRef.current && !profileRef.current.contains(event.target)) {
+        setIsProfileOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  // Close profile options when currentUser changes (i.e., on login/logout)
+  useEffect(() => {
+    setIsProfileOpen(false);
+  }, [currentUser]);
 
   return (
     <header className="bg-white shadow-sm w-full z-50">
@@ -64,28 +103,60 @@ const Header = () => {
             >
               Content
             </Link>
-            <Link
-              to="/lms"
-              className="text-gray-700 hover:text-primary transition-colors text-lg font-medium"
-            >
-              LMS
-            </Link>
+            {currentUser ? (
+              <Link
+                to="/lms"
+                className="text-gray-700 hover:text-primary transition-colors text-lg font-medium"
+              >
+                LMS
+              </Link>
+            ) : (
+              <Link
+                to="/login"
+                className="text-gray-700 hover:text-primary transition-colors text-lg font-medium"
+              >
+                LMS (Login required)
+              </Link>
+            )}
           </nav>
 
           {/* Call to Action Buttons */}
           <div className="hidden lg:flex items-center space-x-4">
-            <Link
-              to="/login"
-              className="text-primary hover:text-secondary transition-colors text-lg font-medium"
-            >
-              Login
-            </Link>
-            <Link
-              to="/signup"
-              className="bg-primary text-white px-5 py-2 rounded-full hover:bg-secondary transition-colors text-lg font-medium"
-            >
-              Sign Up
-            </Link>
+            {currentUser ? (
+              <div className="relative" ref={profileRef}>
+                <button
+                  onClick={() => setIsProfileOpen(!isProfileOpen)}
+                  className="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center text-lg font-medium hover:bg-secondary transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+                >
+                  {getUserInitial()}
+                </button>
+                {isProfileOpen && (
+                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1">
+                    <button
+                      onClick={handleLogout}
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
+                    >
+                      Logout
+                    </button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <>
+                <Link
+                  to="/login"
+                  className="text-primary hover:text-secondary transition-colors text-lg font-medium"
+                >
+                  Login
+                </Link>
+                <Link
+                  to="/signup"
+                  className="bg-primary text-white px-5 py-2 rounded-full hover:bg-secondary transition-colors text-lg font-medium"
+                >
+                  Sign Up
+                </Link>
+              </>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -141,27 +212,58 @@ const Header = () => {
             >
               Content
             </Link>
-            <Link
-              to="/lms"
-              className="block py-2 text-gray-700 hover:text-primary transition-colors text-lg font-medium"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              LMS
-            </Link>
-            <Link
-              to="/login"
-              className="block py-2 text-primary hover:text-secondary transition-colors text-lg font-medium"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Login
-            </Link>
-            <Link
-              to="/signup"
-              className="block py-2 bg-primary text-white px-5 rounded-full hover:bg-secondary transition-colors text-lg font-medium text-center"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Sign Up
-            </Link>
+            {currentUser ? (
+              <Link
+                to="/lms"
+                className="block py-2 text-gray-700 hover:text-primary transition-colors text-lg font-medium"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                LMS
+              </Link>
+            ) : (
+              <Link
+                to="/login"
+                className="block py-2 text-gray-700 hover:text-primary transition-colors text-lg font-medium"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                LMS (Login required)
+              </Link>
+            )}
+            {currentUser ? (
+              <>
+                <div className="flex items-center justify-between py-2">
+                  <span className="text-primary text-lg font-medium">
+                    {currentUser.email}
+                  </span>
+                  <button
+                    onClick={() => {
+                      handleLogout();
+                      setIsMenuOpen(false);
+                    }}
+                    className="text-primary hover:text-secondary transition-colors text-lg font-medium"
+                  >
+                    Logout
+                  </button>
+                </div>
+              </>
+            ) : (
+              <>
+                <Link
+                  to="/login"
+                  className="block py-2 text-primary hover:text-secondary transition-colors text-lg font-medium"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Login
+                </Link>
+                <Link
+                  to="/signup"
+                  className="block py-2 bg-primary text-white px-5 rounded-full hover:bg-secondary transition-colors text-lg font-medium text-center"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Sign Up
+                </Link>
+              </>
+            )}
           </div>
         )}
       </div>
